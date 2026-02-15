@@ -1,23 +1,9 @@
 """
 Vercel Serverless Function Entry Point
 """
-import os
-import sys
-from pathlib import Path
-
-# Get the project root directory
-root_dir = Path(__file__).parent.parent
-backend_dir = root_dir / "backend"
-
-# Add paths
-sys.path.insert(0, str(backend_dir))
-sys.path.insert(0, str(root_dir))
-
-# Set database to /tmp for serverless (writable)
-os.environ["DATABASE_URL"] = "sqlite:////tmp/agriculture.db"
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
 
 app = FastAPI(
     title="智慧农业管理系统",
@@ -207,5 +193,5 @@ def forecast_algorithm_info():
     }
 
 
-# Vercel handler
-handler = app
+# Vercel handler (using Mangum for ASGI support)
+handler = Mangum(app)
