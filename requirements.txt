@@ -1,2 +1,1 @@
-fastapi>=0.109.0
-mangum>=0.17.0
+# No dependencies needed for minimal test
