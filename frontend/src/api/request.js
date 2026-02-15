@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
 
 const request = axios.create({
   baseURL: '/api',
@@ -9,7 +8,6 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use(
   config => {
-    // 可以在这里添加token
     const token = localStorage.getItem('token')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
@@ -27,8 +25,7 @@ request.interceptors.response.use(
     return response.data
   },
   error => {
-    const message = error.response?.data?.message || '请求失败'
-    ElMessage.error(message)
+    console.error('请求失败:', error.response?.data?.message || error.message)
     return Promise.reject(error)
   }
 )

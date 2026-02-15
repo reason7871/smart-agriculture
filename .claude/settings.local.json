@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(python -m uvicorn:*)",
+      "Bash(curl:*)",
+      "Bash(npm install:*)",
+      "Bash(\"/c/Program Files/nodejs/npm\" install)"
+    ]
+  }
+}
